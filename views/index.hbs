@@ -3,6 +3,8 @@
     <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
         <script src="/chat.js"></script>
 		<script>
 		$(document).ready(function(){
@@ -18,7 +20,7 @@
 				}
 			}
 			var btnWidth = Math.floor(width/15);
-			//$('#table button').html('&nbsp;').css({"width": btnWidth,"height": btnWidth});
+			$('#table button').html('&nbsp;');
 			$('#send_username').on('click',function(){
 				$('#status').show();
 			});
@@ -36,6 +38,9 @@
 				border: none;
 				border: .5px solid #34633a85;
 				margin-left: 0.3vw;
+				margin-top: 2px;
+				background-color: #e1dfdc3b;
+    			border-radius: 4%;
 			} 
 			#status{
 				display:none;
@@ -50,6 +55,10 @@
                 color:white;
                 margin-left: 30px;
             }
+			#table button span{
+				font-size:16px;
+				font-weight: bold;
+			}
 		</style>
     </head>
     <body style="padding: 0px;margin: 0px;">
@@ -62,6 +71,11 @@
             <div id="chatroom"></div>
         </div>
 		<div id="table">
-		</div> 
+		</div>
+		<div id="ex1" class="modal">
+			<p id="result"></p>
+			<p>Thank you for playing</p>
+			<a href="#" rel="modal:close" id="closeModel">Close and reload</a>
+		</div>
     </body>
 </html>
