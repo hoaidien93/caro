@@ -35,9 +35,9 @@ $(function () {
 					if((arr[i][j] + arr[i+1][j+1] + arr[i+2][j+2] + arr[i+3][j+3] + arr[i+4][j+4]) === -5) return -1;
 				}
 				//Cheo trai
-				if(i >= 4 && j >= 4){
-					if((arr[i][j] + arr[i-1][j-1] + arr[i-2][j-2] + arr[i-3][j-3] + arr[i-4][j-4]) === 5) return 1;
-					if((arr[i][j] + arr[i-1][j-1] + arr[i-2][j-2] + arr[i-3][j-3] + arr[i-4][j-4]) === -5) return -1;
+				if(i < height - 5 && j >= 4){
+					if((arr[i][j] + arr[i+1][j-1] + arr[i+2][j-2] + arr[i+3][j-3] + arr[i+4][j-4]) === 5) return 1;
+					if((arr[i][j] + arr[i+1][j-1] + arr[i+2][j-2] + arr[i+3][j-3] + arr[i+4][j-4]) === -5) return -1;
 				}
 			}
 		}
@@ -68,11 +68,16 @@ $(function () {
 		//send check btn;
 		btn.on('click',function(){
 			var position = $(this).attr('id');
-			if (isMyTurn) socket.emit('click_btn',{position : position});
+			var pos = {
+				'x' : parseInt(position.split('-')[0]),
+				'y' : parseInt(position.split('-')[1])
+			};
+			if (isMyTurn && arr[pos.x][pos.y] === 0){
+				socket.emit('click_btn',{position : position});
+			}
 		});
 		//listen check btn
 		socket.on('click_btn',(data)=>{
-			console.log(data);
 			var pos = {
 				'x' : parseInt(data.position.split('-')[0]),
 				'y' : parseInt(data.position.split('-')[1])
